@@ -44,19 +44,19 @@ public class IndexedBlockStore extends AbstractBlockstore{
 
     private static final Logger logger = LoggerFactory.getLogger("general");
 
-    Source<byte[], byte[]> indexDS;
+//    Source<byte[], byte[]> indexDS;
     DataSourceArray<List<BlockInfo>> index;
-    Source<byte[], byte[]> blocksDS;
+//    Source<byte[], byte[]> blocksDS;
     ObjectDataSource<Block> blocks;
 
     public IndexedBlockStore(){
     }
 
     public void init(Source<byte[], byte[]> index, Source<byte[], byte[]> blocks) {
-        indexDS = index;
+//        indexDS = index;
         this.index = new DataSourceArray<>(
                 new ObjectDataSource<>(index, BLOCK_INFO_SERIALIZER, 512));
-        this.blocksDS = blocks;
+//        this.blocksDS = blocks;
         this.blocks = new ObjectDataSource<>(blocks, new Serializer<Block, byte[]>() {
             @Override
             public byte[] serialize(Block block) {
@@ -100,8 +100,8 @@ public class IndexedBlockStore extends AbstractBlockstore{
     public synchronized void flush(){
         blocks.flush();
         index.flush();
-        blocksDS.flush();
-        indexDS.flush();
+//        blocksDS.flush();
+//        indexDS.flush();
     }
 
 

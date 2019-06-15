@@ -35,19 +35,19 @@ public class HeaderStore {
 
     private static final Logger logger = LoggerFactory.getLogger("general");
 
-    Source<byte[], byte[]> indexDS;
+//    Source<byte[], byte[]> indexDS;
     DataSourceArray<byte[]> index;
-    Source<byte[], byte[]> headersDS;
+//    Source<byte[], byte[]> headersDS;
     ObjectDataSource<BlockHeader> headers;
 
     public HeaderStore() {
     }
 
     public void init(Source<byte[], byte[]> index, Source<byte[], byte[]> headers) {
-        indexDS = index;
+//        indexDS = index;
         this.index = new DataSourceArray<>(
                 new ObjectDataSource<>(index,Serializers.AsIsSerializer, 2048));
-        this.headersDS = headers;
+//        this.headersDS = headers;
         this.headers = new ObjectDataSource<>(headers, Serializers.BlockHeaderSerializer, 512);
     }
 
@@ -63,8 +63,8 @@ public class HeaderStore {
     public synchronized void flush() {
         headers.flush();
         index.flush();
-        headersDS.flush();
-        indexDS.flush();
+//        headersDS.flush();
+//        indexDS.flush();
     }
 
     public synchronized void saveHeader(BlockHeader header) {
